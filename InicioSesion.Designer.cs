@@ -68,7 +68,7 @@
             btn_ingresar.TabIndex = 7;
             btn_ingresar.Text = "LOGIN";
             btn_ingresar.UseVisualStyleBackColor = false;
-            btn_ingresar.Click += btn_ingresar_Click;
+            btn_ingresar.Click += Btn_ingresar_Click;
             // 
             // cb_mostrar
             // 
@@ -79,7 +79,7 @@
             cb_mostrar.TabIndex = 6;
             cb_mostrar.Text = "Show Password";
             cb_mostrar.UseVisualStyleBackColor = true;
-            cb_mostrar.CheckedChanged += cb_mostrar_CheckedChanged;
+            cb_mostrar.CheckedChanged += Cb_mostrar_CheckedChanged;
             // 
             // txt_password
             // 

@@ -78,7 +78,7 @@
             btn_salir.TextAlign = ContentAlignment.BottomRight;
             btn_salir.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_salir.UseVisualStyleBackColor = false;
-            btn_salir.Click += btn_salir_Click;
+            btn_salir.Click += Btn_salir_Click;
             // 
             // btn_preceptor
             // 
@@ -146,7 +146,7 @@
             btn_profesor.Text = "Añadir Profesor";
             btn_profesor.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_profesor.UseVisualStyleBackColor = false;
-            btn_profesor.Click += btn_profesor_Click;
+            btn_profesor.Click += Btn_profesor_Click;
             // 
             // btn_control
             // 

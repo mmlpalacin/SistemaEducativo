@@ -11,17 +11,16 @@ using System.Windows.Forms;
 
 namespace SistemaEducativo
 {
-    public partial class InicioSesion : Form
+    public partial class InicioSesion : BaseForm
     {
-        Conexion conexion = new Conexion();
-        SqlCommand comando = new SqlCommand();
+        Conexion conexion = new();
 
         public InicioSesion()
         {
             InitializeComponent();
         }
 
-        private void btn_ingresar_Click(object sender, EventArgs e)
+        private void Btn_ingresar_Click(object sender, EventArgs e)
         {
             if (txt_usuario.Text == "" || txt_password.Text == "")
             {
@@ -33,28 +32,24 @@ namespace SistemaEducativo
                 {
                     string query = "SELECT * FROM users WHERE username = @username AND password = @password";
 
-                    using (SqlConnection conn = conexion.abrir())
+                    using SqlConnection conn = conexion.abrir();
+                    using SqlCommand comando = new(query, conn);
+                    comando.Parameters.AddWithValue("@username", txt_usuario.Text.Trim());
+                    comando.Parameters.AddWithValue("@password", txt_password.Text.Trim());
+                    SqlDataAdapter adapter = new(comando);
+                    DataTable table = new();
+                    adapter.Fill(table);
+
+                    if (table.Rows.Count >= 1)
                     {
-                        using (SqlCommand comando = new SqlCommand(query, conn))
-                        {
-                            comando.Parameters.AddWithValue("@username", txt_usuario.Text.Trim());
-                            comando.Parameters.AddWithValue("@password", txt_password.Text.Trim());
-                            SqlDataAdapter adapter = new SqlDataAdapter(comando);
-                            DataTable table = new DataTable();
-                            adapter.Fill(table);
+                        FormPrincipal Form = new();
+                        Form.Show();
+                        this.Close();
+                    }
 
-                            if (table.Rows.Count >= 1)
-                            {
-                                FormPrincipal Form = new FormPrincipal();
-                                Form.Show();
-                                this.Hide();
-                            }
-
-                            else
-                            {
-                                MessageBox.Show("Usuario/Contraseña incorrecta, revisa bien los campos!", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
+                    else
+                    {
+                        MessageBox.Show("Usuario/Contraseña incorrecta, revisa bien los campos!", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
@@ -64,7 +59,7 @@ namespace SistemaEducativo
             }
         }
 
-        private void cb_mostrar_CheckedChanged(object sender, EventArgs e)
+        private void Cb_mostrar_CheckedChanged(object sender, EventArgs e)
         {
             txt_password.PasswordChar = cb_mostrar.Checked ? '\0' : '*';
         }

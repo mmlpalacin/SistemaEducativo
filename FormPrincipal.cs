@@ -11,25 +11,25 @@ using System.Windows.Forms;
 
 namespace SistemaEducativo
 {
-    public partial class FormPrincipal : Form
+    public partial class FormPrincipal : BaseForm
     {
         public FormPrincipal()
         {
             InitializeComponent();
         }
 
-        private void btn_salir_Click(object sender, EventArgs e)
+        private void Btn_salir_Click(object sender, EventArgs e)
         {
             DialogResult check = MessageBox.Show("¿Estas seguro que quieres salir del sistema?", "Mensaje de confirmacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (check == DialogResult.Yes)
             {
-                InicioSesion Form = new InicioSesion();
+                InicioSesion Form = new();
                 Form.Show();
-                this.Hide();
+                this.Close();
             }
         }
-        private void btn_profesor_Click(object sender, EventArgs e)
+        private void Btn_profesor_Click(object sender, EventArgs e)
         {
             MostrarFormulario(new FormDocente());
         }

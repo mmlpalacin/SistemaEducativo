@@ -10,7 +10,7 @@ namespace SistemaEducativo
         private void timer_Tick(object sender, EventArgs e)
         {
             pnl_carga.Width += 6;
-            if (pnl_carga.Width >= 525)
+            if (pnl_carga.Width >= 750)
             {
                 timer.Stop();
 
